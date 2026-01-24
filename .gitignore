@@ -1,0 +1,320 @@
+# Windsor Welfare System - .gitignore
+# This file specifies files and directories that should be excluded from Git version control
+
+# ===========================================
+# PHP and Web Server Files
+# ===========================================
+
+# Composer dependencies
+/vendor/
+composer.lock
+
+# PHP error logs and cache files
+*.log
+logs/
+cache/
+tmp/
+temp/
+
+# PHP session files
+session/
+
+# ===========================================
+# Database Files
+# ===========================================
+
+# Database files (comment out if you want to track schema changes)
+# *.sql
+# *.sqlite
+# *.sqlite3
+
+# Database backups and dumps
+*.sql.gz
+*.sql.bz2
+backups/
+db_backups/
+
+# ===========================================
+# Uploads and User Content
+# ===========================================
+
+# User uploaded files and images
+/uploads/
+/uploads/*
+!/uploads/.gitkeep
+
+# Profile images and documents
+/assets/uploads/
+/assets/images/uploads/
+
+# ===========================================
+# Configuration Files
+# ===========================================
+
+# Environment files with sensitive data
+.env
+.env.local
+.env.production
+.env.staging
+.env.development
+
+# Configuration files with secrets
+config/secrets.php
+config/database.php
+includes/config.local.php
+
+# ===========================================
+# IDE and Editor Files
+# ===========================================
+
+# VS Code
+.vscode/
+*.code-workspace
+.history/
+
+# PhpStorm / IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# TextMate
+*.tmproj
+*.tmproject
+tmtags
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# NetBeans
+nbproject/
+
+# ===========================================
+# Operating System Files
+# ===========================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ===========================================
+# Build and Deployment
+# ===========================================
+
+# Build directories
+/build/
+/dist/
+/public/build/
+
+# Deployment files
+deploy.sh
+deploy.bat
+deployment/
+
+# ===========================================
+# Testing and Development
+# ===========================================
+
+# PHPUnit
+phpunit.xml
+.phpunit.result.cache
+
+# Testing data
+/tests/_data/
+/tests/_output/
+/tests/_support/_generated/
+
+# Coverage reports
+/coverage/
+/clover.xml
+/scoverage.measurements.*
+
+# ===========================================
+# Package Managers
+# ===========================================
+
+# Node.js (if used for frontend assets)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+
+# Bower
+bower_components/
+
+# ===========================================
+# Temporary Files
+# ===========================================
+
+# General temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*.orig
+
+# PHP temporary files
+*.phar
+php_errors.log
+
+# ===========================================
+# Security and Sensitive Data
+# ===========================================
+
+# API keys and secrets
+secrets/
+keys/
+*.key
+*.pem
+*.crt
+*.cer
+
+# Password files
+.htpasswd
+passwd
+
+# ===========================================
+# Documentation and Assets
+# ===========================================
+
+# Generated documentation
+/docs/api/
+/docs/build/
+
+# Minified assets (regenerate from source)
+*.min.js
+*.min.css
+assets/dist/
+assets/build/
+
+# ===========================================
+# Local Development
+# ===========================================
+
+# Local development files
+local/
+dev/
+development/
+
+# XAMPP specific (if running locally)
+xampp/
+htdocs/
+
+# ===========================================
+# Git and Version Control
+# ===========================================
+
+# Git
+.git/
+.gitignore.local
+
+# Subversion
+.svn/
+
+# Mercurial
+.hg/
+.hgignore
+
+# ===========================================
+# Miscellaneous
+# ===========================================
+
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Executables
+*.exe
+*.msi
+*.bat
+*.cmd
+*.com
+
+# ===========================================
+# Project Specific Exclusions
+# ===========================================
+
+# Windsor Welfare specific
+# Keep schema files but exclude data dumps
+database_data.sql
+*_data.sql
+seeders/data/
+
+# Error logs specific to this project
+error_log
+logs/*.log
+
+# Cache directories
+/cache/
+/tmp/
+/temp/
+
+# Session storage
+/sessions/
+
+# ===========================================
+# Notes
+# ===========================================
+#
+# To track empty directories that should exist, create a .gitkeep file:
+#   touch uploads/.gitkeep
+#   git add uploads/.gitkeep
+#
+# To override these rules locally, create a .gitignore.local file
+# and add it to your local .gitignore (not committed to repo)
+#
+# Remember to review this file periodically as your project evolves!
