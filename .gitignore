@@ -249,11 +249,10 @@ xampp/
 htdocs/
 
 # ===========================================
-# Git and Version Control
+# Local Overrides
 # ===========================================
 
-# Git
-.git/
+# Local .gitignore overrides (not committed to repo)
 .gitignore.local
 
 # Subversion
@@ -305,6 +304,13 @@ logs/*.log
 
 # Session storage
 /sessions/
+
+# ===========================================
+# Local Overrides
+# ===========================================
+
+# Local .gitignore overrides (not committed to repo)
+.gitignore.local
 
 # ===========================================
 # Notes

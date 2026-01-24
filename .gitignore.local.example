@@ -1,0 +1,40 @@
+# Local .gitignore overrides
+# This file contains personal/local Git ignore rules
+# Copy this to .gitignore.local and customize for your local environment
+# The .gitignore.local file should NOT be committed to the repository
+
+# ===========================================
+# Local Development Overrides
+# ===========================================
+
+# Uncomment and modify these lines as needed for your local setup
+
+# Local configuration files
+# config.local.php
+# .env.local
+
+# IDE specific files for your editor
+# .vscode/settings.json
+# .idea/workspace.xml
+
+# Local logs and debug files
+# debug.log
+# error_log.local
+
+# Temporary files
+# *.tmp
+# temp/
+
+# Database dumps for local testing
+# local_dump.sql
+
+# ===========================================
+# Example Overrides
+# ===========================================
+
+# If you need to track certain files locally that are ignored globally:
+# !config/database.local.php
+
+# If you want to ignore additional files locally:
+# *.log
+# cache/
