@@ -1,0 +1,13 @@
+{
+    "name": "windsor/welfare",
+    "description": "Windsor Welfare System",
+    "authors": [
+        {
+            "name": "Cheecheez101",
+            "email": "michaelnganga678@gmail.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.29"
+    }
+}
