@@ -83,7 +83,7 @@ CREATE TABLE users (
 INSERT INTO users (employee_id, full_name, username, password, role) VALUES
 ('EMP001', 'Mary Njoki', NULL, '$2y$10$VhardYuMyo34aiOjq.wMZ.9S126VlLU.To.xko4pFaH10LuX2wQ9S', 'member'),
 ('EMP002', 'John Doe', NULL, $2y$10$VhardYuMyo34aiOjq.wMZ.9S126VlLU.To.xko4pFaH10LuX2wQ9S', 'member'),
-(NULL, 'super Admin', 'admin', '$2y$10$VhardYuMyo34aiOjq.wMZ.9S126VlLU.To.xko4pFaH10LuX2wQ9S', 'admin');
+(NULL, 'superadmin', 'admin', '$2y$10$VhardYuMyo34aiOjq.wMZ.9S126VlLU.To.xko4pFaH10LuX2wQ9S', 'admin');
 -- Add password reset columns to existing users table (if not already present)
 ALTER TABLE users ADD COLUMN IF NOT EXISTS password_reset_token VARCHAR(255);
 ALTER TABLE users ADD COLUMN IF NOT EXISTS password_reset_expires DATETIME;
