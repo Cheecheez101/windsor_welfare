@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = initiate_password_reset($pdo, $identifier);
 
         if ($result) {
-            $message = "Password reset initiated successfully! Since email is not configured, please contact an administrator with this reset code: <strong>" . substr($result['token'], 0, 8) . "</strong>";
+            $message = "Password reset initiated successfully! Since email is not configured, please contact an administrator with this reset code: <strong>" . $result['token'] . "</strong>";
         } else {
             $error = "User not found. Please check your Employee ID or Username.";
         }

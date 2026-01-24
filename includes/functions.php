@@ -9,6 +9,8 @@ function calculate_token($savings) {
 
 function log_audit($pdo, $action, $table_name, $record_id, $old_values = null, $new_values = null) {
     $user_id = $_SESSION['user_id'] ?? null;
+    $old_values = is_array($old_values) ? json_encode($old_values) : $old_values;
+    $new_values = is_array($new_values) ? json_encode($new_values) : $new_values;
     $stmt = $pdo->prepare("INSERT INTO audit_logs (user_id, action, table_name, record_id, old_values, new_values) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->execute([$user_id, $action, $table_name, $record_id, $old_values, $new_values]);
 }
@@ -48,7 +50,7 @@ function initiate_password_reset($pdo, $identifier) {
 
     // Generate reset token
     $token = generate_password_reset_token();
-    $expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
+    $expires = date('Y-m-d H:i:s', strtotime('+24 hours'));
 
     // Update user with reset token
     $stmt = $pdo->prepare("UPDATE users SET password_reset_token = ?, password_reset_expires = ? WHERE id = ?");
