@@ -1,11 +1,11 @@
 <?php
 // Database configuration
-$host = 'windsorwelfare.cxucag6oyc0b.eu-north-1.rds.amazonaws.com'; // RDS endpoint
-$dbname = 'windsor_welfare';  // Correct DB name with underscore
-$username = 'welfare_user';   // Dedicated app user (recommended)
-$password = 'StrongPassword123!'; // Replace with your chosen app user password
+$host = 'localhost'; // Local MySQL server
+$dbname = 'windsor_welfare';  // Database name
+$username = 'root';   // Default XAMPP MySQL username
+$password = ''; // Default XAMPP MySQL password (empty)
 $port = 3306;                 // Default MySQL port
-$ssl_ca = '/etc/ssl/certs/global-bundle.pem'; // Path to Amazon RDS CA cert on EC2
+// $ssl_ca = '/etc/ssl/certs/global-bundle.pem'; // Path to Amazon RDS CA cert on EC2
 
 try {
     $pdo = new PDO(
@@ -14,9 +14,7 @@ try {
         $password,
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::MYSQL_ATTR_SSL_CA => $ssl_ca,
-            PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false // optional, can enforce true
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]
     );
 } catch (PDOException $e) {
