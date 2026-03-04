@@ -331,7 +331,7 @@ h2 {
                 <label for="payment_method">Payment Method</label>
                 <select name="payment_method" id="payment_method">
                     <option value="">All Methods</option>
-                    <option value="cash" <?php echo $payment_method == 'cash' ? 'selected' : ''; ?>>Cash</option>
+                    <option value="cash" <?php echo $payment_method == 'cash' ? 'selected' : ''; ?>>Payroll Deduction</option>
                     <option value="card" <?php echo $payment_method == 'card' ? 'selected' : ''; ?>>Card</option>
                     <option value="mpesa" <?php echo $payment_method == 'mpesa' ? 'selected' : ''; ?>>M-Pesa</option>
                 </select>
@@ -385,7 +385,7 @@ h2 {
                         <tr>
                             <td><?php echo $c['id']; ?></td>
                             <td class="amount-cell">KES <?php echo number_format($c['amount'], 2); ?></td>
-                            <td><span class="payment-method <?php echo $c['payment_method']; ?>"><?php echo ucfirst($c['payment_method']); ?></span></td>
+                            <td><span class="payment-method <?php echo $c['payment_method']; ?>"><?php echo ($c['payment_method'] === 'cash' ? 'Payroll Deduction' : ($c['payment_method'] === 'bank' ? 'Bank Transfer' : ucfirst($c['payment_method']))); ?></span></td>
                             <td><?php echo htmlspecialchars($c['type'] ?? 'N/A'); ?></td>
                             <td><?php echo date('d M Y', strtotime($c['contribution_date'])); ?></td>
                         </tr>

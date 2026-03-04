@@ -52,7 +52,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
             $c['id'],
             $c['member_name'],
             number_format($c['amount'], 2),
-            ucfirst($c['payment_method']),
+            ($c['payment_method'] === 'cash' ? 'Payroll Deduction' : ($c['payment_method'] === 'bank' ? 'Bank Transfer' : ucfirst($c['payment_method']))),
             date('d M Y', strtotime($c['contribution_date']))
         ]);
     }
@@ -96,7 +96,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'excel') {
         $sheet->setCellValue('A' . $rowIndex, $c['id']);
         $sheet->setCellValue('B' . $rowIndex, $c['member_name']);
         $sheet->setCellValue('C' . $rowIndex, $c['amount']);
-        $sheet->setCellValue('D' . $rowIndex, ucfirst($c['payment_method']));
+        $sheet->setCellValue('D' . $rowIndex, ($c['payment_method'] === 'cash' ? 'Payroll Deduction' : ($c['payment_method'] === 'bank' ? 'Bank Transfer' : ucfirst($c['payment_method']))));
         $sheet->setCellValue('E' . $rowIndex, date('d M Y', strtotime($c['contribution_date'])));
         $rowIndex++;
     }
@@ -156,7 +156,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/windsor_welfare/includes/header.php';
             <label>Payment Method:</label>
             <select name="payment_method">
                 <option value="">All</option>
-                <option value="cash" <?php echo $payment_method === 'cash' ? 'selected' : ''; ?>>Cash</option>
+                <option value="cash" <?php echo $payment_method === 'cash' ? 'selected' : ''; ?>>Payroll Deduction</option>
                 <option value="card" <?php echo $payment_method === 'card' ? 'selected' : ''; ?>>Card</option>
                 <option value="mpesa" <?php echo $payment_method === 'mpesa' ? 'selected' : ''; ?>>M-Pesa</option>
             </select>
@@ -205,7 +205,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/windsor_welfare/includes/header.php';
                 <td><?php echo $c['id']; ?></td>
                 <td><?php echo htmlspecialchars($c['member_name']); ?></td>
                 <td><?php echo number_format($c['amount'], 2); ?></td>
-                <td><?php echo ucfirst($c['payment_method']); ?></td>
+                <td><?php echo ($c['payment_method'] === 'cash' ? 'Payroll Deduction' : ($c['payment_method'] === 'bank' ? 'Bank Transfer' : ucfirst($c['payment_method']))); ?></td>
                 <td><?php echo date('d M Y', strtotime($c['contribution_date'])); ?></td>
             </tr>
             <?php endforeach; ?>

@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         .form-group input {
             width: 100%;
-            padding: 15px 20px;
+            padding: 15px 20px 15px 46px;
             border: 2px solid #e9ecef;
             border-radius: 12px;
             font-size: 16px;
@@ -145,12 +145,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
-        .form-group i {
+        .password-group input {
+            padding-left: 20px;
+            padding-right: 52px;
+        }
+
+        .password-input-wrap {
+            position: relative;
+        }
+
+        .password-toggle {
             position: absolute;
-            right: 15px;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #6c757d;
+            font-size: 18px;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-toggle:hover {
+            color: #495057;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
             top: 45px;
             color: #6c757d;
             font-size: 18px;
+            pointer-events: none;
+        }
+
+        .password-toggle i {
+            position: static;
+            color: inherit;
+            font-size: 18px;
+            pointer-events: none;
         }
 
         .login-btn {
@@ -315,14 +353,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" id="login_id" name="login_id" required
                        placeholder="Enter your Employee ID or Username"
                        value="<?php echo htmlspecialchars($_POST['login_id'] ?? ''); ?>">
-                <i class="fas fa-user"></i>
+                <i class="fas fa-user input-icon"></i>
             </div>
 
-            <div class="form-group">
+            <div class="form-group password-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required
-                       placeholder="Enter your password">
-                <i class="fas fa-lock"></i>
+                <div class="password-input-wrap">
+                    <input type="password" id="password" name="password" required
+                           placeholder="Enter your password">
+                    <button type="button" class="password-toggle" id="password_toggle" aria-label="Show password" title="Show password">
+                        <i class="fas fa-eye" id="password_toggle_icon"></i>
+                    </button>
+                </div>
             </div>
 
             <button type="submit" class="login-btn">
@@ -365,6 +407,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Auto-focus first input
             document.getElementById('login_id').focus();
+
+            const passwordInput = document.getElementById('password');
+            const passwordToggle = document.getElementById('password_toggle');
+            const passwordToggleIcon = document.getElementById('password_toggle_icon');
+
+            if (passwordInput && passwordToggle && passwordToggleIcon) {
+                passwordToggle.addEventListener('click', function () {
+                    const showing = passwordInput.type === 'text';
+                    passwordInput.type = showing ? 'password' : 'text';
+                    passwordToggleIcon.classList.toggle('fa-eye', showing);
+                    passwordToggleIcon.classList.toggle('fa-eye-slash', !showing);
+                    passwordToggle.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+                    passwordToggle.setAttribute('title', showing ? 'Show password' : 'Hide password');
+                });
+            }
         });
     </script>
 </body>

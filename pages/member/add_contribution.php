@@ -205,7 +205,7 @@ h2 {
                 <select name="payment_method" id="payment_method" required>
                     <option value="card">💳 Card</option>
                     <option value="mpesa">📱 M-Pesa</option>
-                    <option value="cash">💵 Cash</option>
+                    <option value="cash">💼 Payroll Deduction</option>
                 </select>
             </div>
 

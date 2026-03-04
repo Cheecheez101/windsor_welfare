@@ -42,6 +42,8 @@ for ($month = 1; $month <= 12; $month++) {
     ")->fetchColumn() ?? 0;
     $monthly_contributions[] = ['month' => $month_name, 'amount' => $amount];
 }
+$max_monthly_contribution = max(array_map('floatval', array_column($monthly_contributions, 'amount')));
+$max_monthly_contribution = $max_monthly_contribution > 0 ? $max_monthly_contribution : 1;
 ?>
 
 <style>
@@ -293,6 +295,65 @@ h2 {
     border: 2px dashed #dee2e6;
 }
 
+.chart-placeholder.has-data {
+    display: block;
+    height: auto;
+    min-height: 300px;
+    padding: 20px 15px 12px;
+    background: #fafbfc;
+}
+
+.monthly-bar-chart {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(40px, 1fr));
+    gap: 10px;
+    align-items: end;
+    height: 230px;
+    margin-bottom: 12px;
+}
+
+.month-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.month-value {
+    font-size: 10px;
+    color: #495057;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.month-bar {
+    width: 100%;
+    max-width: 30px;
+    border-radius: 8px 8px 4px 4px;
+    background: linear-gradient(180deg, #667eea, #764ba2);
+    min-height: 4px;
+    box-shadow: 0 3px 8px rgba(102, 126, 234, 0.35);
+}
+
+.month-label {
+    margin-top: 8px;
+    font-size: 11px;
+    color: #6c757d;
+    font-weight: 600;
+}
+
+.chart-total {
+    text-align: center;
+    font-size: 13px;
+    color: #495057;
+    font-weight: 700;
+}
+
+.chart-empty {
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 15px;
@@ -369,17 +430,27 @@ h2 {
     <!-- Chart Section -->
     <div class="chart-container">
         <h3><i class="fas fa-chart-line"></i> Monthly Contributions (<?php echo $current_year; ?>)</h3>
-        <div class="chart-placeholder">
-            <div style="text-align: center;">
-                <i class="fas fa-chart-bar" style="font-size: 3em; margin-bottom: 15px; opacity: 0.5;"></i>
-                <div>Monthly Contributions Chart</div>
-                <small style="display: block; margin-top: 10px;">
-                    <?php
-                    $total_year = array_sum(array_column($monthly_contributions, 'amount'));
-                    echo 'Total: KES ' . number_format($total_year, 0);
-                    ?>
-                </small>
-            </div>
+        <?php $total_year = array_sum(array_column($monthly_contributions, 'amount')); ?>
+        <div class="chart-placeholder <?php echo $total_year > 0 ? 'has-data' : ''; ?>">
+            <?php if ($total_year <= 0): ?>
+                <div class="chart-empty">
+                    <i class="fas fa-chart-bar" style="font-size: 3em; margin-bottom: 15px; opacity: 0.5;"></i>
+                    <div>No contribution data for <?php echo $current_year; ?> yet.</div>
+                    <small style="display: block; margin-top: 10px;">Total: KES 0</small>
+                </div>
+            <?php else: ?>
+                <div class="monthly-bar-chart">
+                    <?php foreach ($monthly_contributions as $row): ?>
+                        <?php $bar_height = max(4, round((floatval($row['amount']) / $max_monthly_contribution) * 190)); ?>
+                        <div class="month-col">
+                            <div class="month-value"><?php echo $row['amount'] > 0 ? number_format($row['amount'] / 1000, 1) . 'k' : ''; ?></div>
+                            <div class="month-bar" style="height: <?php echo $bar_height; ?>px;" title="<?php echo $row['month']; ?>: KES <?php echo number_format($row['amount'], 2); ?>"></div>
+                            <div class="month-label"><?php echo $row['month']; ?></div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <div class="chart-total">Total: KES <?php echo number_format($total_year, 0); ?></div>
+            <?php endif; ?>
         </div>
     </div>
 
